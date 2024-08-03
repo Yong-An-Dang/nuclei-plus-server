@@ -1,0 +1,5 @@
+chat_openai:
+  # together: https://api.together.xyz/
+  base_url: "https://api.together.xyz/v1"
+  api_key: "xxxx"
+  model: "Qwen/Qwen2-72B-Instruct"
