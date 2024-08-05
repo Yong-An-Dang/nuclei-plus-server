@@ -1,7 +1,12 @@
 import base64
+import logging
+
 import yaml
 
 from . import models, schemas, db
+from .schemas import SyncFilter
+
+logger = logging.getLogger(__name__)
 
 
 def create_template(template: schemas.SyncTemplate):
@@ -9,16 +14,38 @@ def create_template(template: schemas.SyncTemplate):
     template_dict: dict = yaml.safe_load(content)
 
     tmpTemplate = models.Template(dir=template.dir, content=content, content_base64=template.content)
-    tmpTemplate.filter_id = template_dict.get("id", "")
-    tmpTemplate.filter_name = template_dict.get("name", "")
-    tmpTemplate.filter_author = template_dict.get("author", "")
-    tmpTemplate.filter_severity = template_dict.get("severity", "")
-    tmpTemplate.filter_tags = template_dict.get("tags", "")
+    info: dict = template_dict.get("info")
+    if info:
+        tmpTemplate.filter_id = info.get("id", "")
+        tmpTemplate.filter_name = info.get("name", "")
+        tmpTemplate.filter_author = info.get("author", "")
+        tmpTemplate.filter_severity = info.get("severity", "")
+        tmpTemplate.filter_tags = info.get("tags", "")
 
     db.add(tmpTemplate)
     db.commit()
     db.refresh(tmpTemplate)
     return tmpTemplate
+
+
+def get_templates(template_filter: SyncFilter, skip: int = 0, limit: int = 10):
+    logger.debug(template_filter)
+    filters = []
+
+    if template_filter.dir:
+        filters.append(models.Template.dir.like(f"%{template_filter.dir}%"))
+    if template_filter.id:
+        filters.append(models.Template.filter_id == template_filter.id)
+    if template_filter.name:
+        filters.append(models.Template.filter_name.like(f"%{template_filter.name}%"))
+    if template_filter.author:
+        filters.append(models.Template.filter_author.like(f"%{template_filter.author}%"))
+    if template_filter.severity:
+        filters.append(models.Template.filter_severity.like(f"%{template_filter.severity}%"))
+    if template_filter.tags:
+        filters.append(models.Template.filter_tags.like(f"%{template_filter.tags}%"))
+
+    return db.query(models.Template).filter(*filters).offset(skip).limit(limit).all()
 
 # def get_user(db: Session, user_id: int):
 #     return db.query(models.User).filter(models.User.id == user_id).first()

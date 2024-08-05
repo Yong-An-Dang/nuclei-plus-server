@@ -7,10 +7,10 @@ from server.sql.schemas import SyncRequestBody, SyncResponseBody
 
 logger = logging.getLogger(__name__)
 
-router = APIRouter(prefix="/sync", tags=["sync"])
+router = APIRouter(tags=["sync"])
 
 
-@router.post("/")
+@router.post("/sync")
 def sync(body: SyncRequestBody):
     logger.debug(body.action)
     if body.action == "upload":
