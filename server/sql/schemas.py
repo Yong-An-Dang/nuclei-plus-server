@@ -61,3 +61,11 @@ class SyncResponseBody(BaseModel):
     pageSize: int = None
     currentPage: int = None
     total: int = None
+
+
+class ChatRequestBody(BaseModel):
+    human_message: str = ""
+
+
+class ChatResponseBody(BaseModel):
+    ai_message: str = ""

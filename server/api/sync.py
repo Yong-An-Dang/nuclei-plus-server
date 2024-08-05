@@ -3,7 +3,7 @@ import logging
 from fastapi import APIRouter
 
 from server.services.sync import sync_upload, sync_download
-from server.sql.schemas import SyncRequestBody, SyncResponseBody
+from server.sql.schemas import SyncRequestBody
 
 logger = logging.getLogger(__name__)
 

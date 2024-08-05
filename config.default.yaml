@@ -1,4 +1,4 @@
-chat_openai:
+chat:
   # together: https://api.together.xyz/
   base_url: "https://api.together.xyz/v1"
   api_key: "xxxx"
