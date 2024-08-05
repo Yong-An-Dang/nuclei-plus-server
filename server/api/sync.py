@@ -1,8 +1,21 @@
+import logging
+
 from fastapi import APIRouter
+
+from server.services.sync import sync_upload, sync_download
+from server.sql.schemas import SyncRequestBody, SyncResponseBody
+
+logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/sync", tags=["sync"])
 
 
 @router.post("/")
-async def sync():
-    return {"Hello": "World"}
+def sync(body: SyncRequestBody):
+    logger.debug(body.action)
+    if body.action == "upload":
+        response = sync_upload(body)
+    else:
+        response = sync_download(body)
+
+    return response
