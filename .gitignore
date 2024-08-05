@@ -163,5 +163,4 @@ cython_debug/
 ./config.yml
 sqlite.db
 config.yml
-server/services/agent.py
 server/services/agent_bak.py
