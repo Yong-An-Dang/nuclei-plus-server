@@ -99,8 +99,8 @@ def main():
 
 if __name__ == "__main__":
     sys.argv = ["main.py", "start"]
-    # sys.argv = ["main.py", "version"]
     # sys.argv = ["main.py", "config"]
+    # sys.argv = ["main.py", "version"]
     # sys.argv = ["main.py", "--help"]
     # sys.argv = ["main.py", "start", "--help"]
     main()

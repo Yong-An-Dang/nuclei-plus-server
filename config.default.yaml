@@ -3,6 +3,13 @@ chat.api_url: "https://api.together.xyz/v1"           # together: https://api.to
 chat.api_key: "xxxx"                                  # API Token
 chat.api_model: "Qwen/Qwen2-72B-Instruct"             # 指定大模型
 
+# 代理配置
+proxy.type: "http"                                    # 代理类型，可选: http socks5
+proxy.host: ""                                        # 代理地址
+proxy.port: 0                                         # 代理端口
+proxy.username: ""                                    # 代理用户名
+proxy.password: ""                                    # 代理密码
+
 # 日志配置
 log.level: INFO                                       # log 级别，可选: DEBUG INFO WARNING ERROR CRITICAL
 log.path: ""                                          # log 文件路径, 为空时使用 /home/user/openrasp-iast/log
