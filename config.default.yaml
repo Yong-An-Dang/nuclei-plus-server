@@ -1,5 +1,17 @@
-chat:
-  # together: https://api.together.xyz/
-  base_url: "https://api.together.xyz/v1"
-  api_key: "xxxx"
-  model: "Qwen/Qwen2-72B-Instruct"
+# 大模型接口
+chat.api_url: "https://api.together.xyz/v1"           # together: https://api.together.xyz/
+chat.api_key: "xxxx"                                  # API Token
+chat.api_model: "Qwen/Qwen2-72B-Instruct"             # 指定大模型
+
+# 日志配置
+log.level: INFO                                       # log 级别，可选: DEBUG INFO WARNING ERROR CRITICAL
+log.path: ""                                          # log 文件路径, 为空时使用 /home/user/openrasp-iast/log
+log.rotate_size: 5                                    # 触发 rotate 的日志大小，单位MB
+log.rotate_num: 2                                     # rotate 文件最多保存份数不包括当前日志文件
+
+# 数据库配置
+database.host: localhost                              # 数据库地址
+database.port: 3306                                   # 端口
+database.username: root                               # 连接用户名
+database.password: ''                                 # 连接密码, 纯数字需使用引号包裹 如 '123456'
+database.db_name: openrasp                            # 数据库名

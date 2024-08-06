@@ -21,11 +21,11 @@ class Config(object):
         初始化
         """
         self._config_path_candidate = [
-            os.path.expanduser("~") + "/openrasp-iast/config.yaml",
-            "/etc/openrasp-iast/config.yaml",
+            os.path.expanduser("~") + "/nuclei-plus-server/config.yaml",
+            "/etc/nuclei-plus-server/config.yaml",
             "./config.yaml"
         ]
-        self._default_log_path = os.path.expanduser("~") + "/openrasp-iast/log"
+        self._default_log_path = os.path.expanduser("~") + "/nuclei-plus-server/log"
 
         self._config_path = None
         self.config_dict = None
@@ -59,7 +59,7 @@ class Config(object):
         """
         保存当前配置
         """
-        with open(self._config_path, "w") as f:
+        with open(self._config_path, "w", encoding="utf-8") as f:
             content = yaml.dump(self.config_dict)
             f.write(self._set_comment(content))
 
@@ -109,7 +109,7 @@ class Config(object):
         """
         为生成的配置文件添加注释
         """
-        with open(self._main_path + "/config.default.yaml", "r") as f:
+        with open(self._main_path + "/config.default.yaml", "r", encoding='utf-8') as f:
             origin_config = f.read()
 
         comments = {}
@@ -128,6 +128,9 @@ class Config(object):
         maxlen += 1
 
         for line in lines:
+            if line.startswith("#"):
+                new_content.append("\n")
+                new_content.append(line)
             if line.find(":") != -1:
                 key = line[:line.find(":")]
                 if key in comments:
@@ -187,7 +190,7 @@ class Config(object):
             self._config_path = path
         if self._config_path is None or not os.path.isfile(self._config_path):
             # cmd = "'" + sys.argv[0] + " config'"
-            # print("[!] OpenRASP-IAST init error, no config file found, use {} to generate a config file!".format(cmd))
+            # print("[!] nuclei-plus-server init error, no config file found, use {} to generate a config file!".format(cmd))
             print(
                 '[!] No config file found, please refer to https://rasp.baidu.com/doc/install/iast.html#config for initial setup')
             sys.exit(1)
@@ -209,17 +212,17 @@ class Config(object):
                 if not os.path.exists(self.config_dict["log.path"]):
                     os.makedirs(self.config_dict["log.path"])
                 else:
-                    with open(self.config_dict["log.path"] + "/log.file", "w") as f:
+                    with open(self.config_dict["log.path"] + "/log.file", "w", encoding="utf-8") as f:
                         pass
                     os.remove(self.config_dict["log.path"] + "/log.file")
             except Exception as e:
-                print("[!] OpenRASP-IAST init error, log path: {} is not writable!".format(
+                print("[!] nuclei-plus-server init error, log path: {} is not writable!".format(
                     os.path.abspath(self.config_dict["log.path"])))
                 sys.exit(1)
 
         except Exception as e:
             print(
-                "[!] OpenRASP-IAST load config error! Please check config file: {}! \n".format(self._config_path))
+                "[!] nuclei-plus-server load config error! Please check config file: {}! \n".format(self._config_path))
             traceback.print_exc()
             sys.exit(1)
 

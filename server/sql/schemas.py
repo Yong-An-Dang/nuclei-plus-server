@@ -64,8 +64,8 @@ class SyncResponseBody(BaseModel):
 
 
 class ChatRequestBody(BaseModel):
-    human_message: str = ""
+    humanMessage: str = ""
 
 
 class ChatResponseBody(BaseModel):
-    ai_message: str = ""
+    aiMessage: str = ""
