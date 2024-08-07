@@ -164,3 +164,4 @@ cython_debug/
 sqlite.db
 config.yml
 server/services/agent_bak.py
+poetry.lock

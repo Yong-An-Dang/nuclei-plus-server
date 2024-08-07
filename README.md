@@ -25,6 +25,9 @@ nuclei-plus辅助服务
 # 安装构建工具
 pip install poetry
 
+# 版本标签
+git tag -a v1.0.0 -m "Initial release"
+
 # 构建
 poetry build
 ```
