@@ -7,7 +7,7 @@ from server.sql.schemas import SyncRequestBody
 
 logger = logging.getLogger(__name__)
 
-router = APIRouter(tags=["sync"])
+router = APIRouter(prefix="/template", tags=["sync"])
 
 
 @router.post("/sync")

@@ -13,8 +13,9 @@ def create_template(template: schemas.SyncTemplate):
     content = base64.b64decode(template.content).decode('utf-8')
     template_dict: dict = yaml.safe_load(content)
 
-    tmpTemplate = models.Template(dir=template.dir, content=content, content_base64=template.content)
-    info: dict = template_dict.get("info")
+    tmpTemplate = models.Template(
+        dir=template.dir, content=content, content_base64=template.content)
+    info: dict = template_dict.get("info", None)
     if info:
         tmpTemplate.filter_id = info.get("id", "")
         tmpTemplate.filter_name = info.get("name", "")
@@ -37,13 +38,17 @@ def get_templates(template_filter: SyncFilter, skip: int = 0, limit: int = 10):
     if template_filter.id:
         filters.append(models.Template.filter_id == template_filter.id)
     if template_filter.name:
-        filters.append(models.Template.filter_name.like(f"%{template_filter.name}%"))
+        filters.append(models.Template.filter_name.like(
+            f"%{template_filter.name}%"))
     if template_filter.author:
-        filters.append(models.Template.filter_author.like(f"%{template_filter.author}%"))
+        filters.append(models.Template.filter_author.like(
+            f"%{template_filter.author}%"))
     if template_filter.severity:
-        filters.append(models.Template.filter_severity.like(f"%{template_filter.severity}%"))
+        filters.append(models.Template.filter_severity.like(
+            f"%{template_filter.severity}%"))
     if template_filter.tags:
-        filters.append(models.Template.filter_tags.like(f"%{template_filter.tags}%"))
+        filters.append(models.Template.filter_tags.like(
+            f"%{template_filter.tags}%"))
 
     return db.query(models.Template).filter(*filters).offset(skip).limit(limit).all()
 
