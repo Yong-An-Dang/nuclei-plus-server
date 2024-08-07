@@ -2,6 +2,9 @@
 chat.api_url: "https://api.together.xyz/v1"           # together: https://api.together.xyz/
 chat.api_key: "xxxx"                                  # API Token
 chat.api_model: "Qwen/Qwen2-72B-Instruct"             # 指定大模型
+#chat.api_url: http://localhost:11434/v1              # Ollama: http://localhost:11434/v1
+#chat.api_key: ollama                                 # API Token
+#chat.api_model: qwen2:7b                             # 指定大模型
 
 # 代理配置
 proxy.type: "http"                                    # 代理类型，可选: http socks5
