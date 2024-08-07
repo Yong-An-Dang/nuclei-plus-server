@@ -6,7 +6,11 @@ authors = ["G3G4X5X6 <g3g4x5x6@foxmail.com>"]
 license = "Apache-2.0"
 readme = "README.md"
 
-packages = [{ include = "server" }, { include = "main.py" }]
+packages = [
+    { include = "server" },
+    { include = "main.py" },
+    { include = "version.py" },
+]
 
 include = [
     { path = "README.md", format = [
