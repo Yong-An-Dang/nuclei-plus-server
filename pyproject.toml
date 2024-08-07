@@ -1,0 +1,33 @@
+[tool.poetry]
+name = "nuclei-plus-server"
+version = "1.0.0"
+description = "nuclei-plus辅助服务"
+authors = ["G3G4X5X6 <g3g4x5x6@foxmail.com>"]
+license = "Apache-2.0"
+readme = "README.md"
+
+packages = [
+    { include = "server" },
+    { include = "main.py" },
+]
+
+include = [
+    { path = "README.md", format =  ["sdist", "wheel"] },
+    { path = "LICENSE", format = ["sdist", "wheel"] },
+    { path = "config.default.yaml", format = ["sdist", "wheel"] }
+]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+requests = "^2.32.3"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.poetry.scripts]
+nuclei-plus-server = 'main:main'
