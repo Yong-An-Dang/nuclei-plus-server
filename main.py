@@ -1,11 +1,11 @@
 import argparse
 import logging
-import os
 import sys
 import urllib
 
 import uvicorn
 
+import version
 from server.core.config import Config
 
 logging.basicConfig(level=logging.DEBUG)
@@ -46,7 +46,7 @@ def set_config(args):
 
 
 def show_version(args):
-    print(f"NPS_{open(os.path.join(os.path.dirname(__file__), 'VERSION')).read().strip()}")
+    print(f"nuclei-plus-server_v{version.__version__}")
 
 
 def main():
@@ -98,7 +98,7 @@ def main():
 
 
 if __name__ == "__main__":
-    # sys.argv = ["main.py", "start"]
+    sys.argv = ["main.py", "start"]
     # sys.argv = ["main.py", "config"]
     # sys.argv = ["main.py", "version"]
     # sys.argv = ["main.py", "--help"]
